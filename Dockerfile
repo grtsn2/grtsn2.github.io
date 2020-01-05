@@ -1,8 +1,10 @@
-FROM jekyll/jekyll
+FROM jekyll/jekyll:latest
 
-COPY --chown=jekyll:jekyll Gemfile .
-COPY --chown=jekyll:jekyll Gemfile.lock .
+COPY Gemfile .
+COPY Gemfile.lock
 
 RUN bundle install --quiet --clean
+RUN jekyll clean
+RUN jekyll build
 
 CMD ["jekyll", "serve"]
